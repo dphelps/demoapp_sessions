@@ -5,7 +5,8 @@ class DemosController < ApplicationController
 	def create
 	  user = User.find_by(email: params[:demos][:email].downcase)
 	  if user && user.password == params[:demos][:password]
-	  	#Log in the user
+	  	login(user)
+	  	redirect_to user
 	  else
 	  	flash.now[:danger] = "Invalid email/password"
 	  	render 'new'
@@ -13,5 +14,7 @@ class DemosController < ApplicationController
 	end
 
 	def destroy
+		logout
+		redirect_to root_url
 	end
 end

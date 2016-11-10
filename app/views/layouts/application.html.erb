@@ -9,7 +9,14 @@
 <body>
 <% flash.each do |message_type, message| %>
 <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %><br />
+<% if logged_in? %>
+  <%= link_to current_user.email, user_path(current_user) %>
+  <%= link_to "Logout", logout_path %>
+<% else %>
+  <%= link_to "Login", login_path %>
 <% end %>
+
 <%= yield %>
 
 </body>

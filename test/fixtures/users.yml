@@ -1,9 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: MyString
-  password: MyString
+  email: dphelps@cmu.edu
+  password: MyPassword
 
-two:
-  email: MyString
-  password: MyString
