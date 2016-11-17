@@ -2,5 +2,10 @@
 
 one:
   email: dphelps@cmu.edu
-  password: MyPassword
+  password_digest: <%= BCrypt::Password.create('MyPassword', cost: 4) %>
+
+two:
+  email: MyString@cmu.edu
+  password_digest: <%= BCrypt::Password.create('MyPassword', cost: 4) %>
+  
 

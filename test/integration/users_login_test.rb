@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class UsersLoginTest < ActionDispatch::IntegrationTest
+
+  setup :initialize_user
+
+
   test "login with invalid information" do
   	get new_demo_path
   	assert_template 'demos/new'
@@ -14,7 +18,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   test "login with valid information followed by logout" do
   	get new_demo_path
   	assert_template 'demos/new'
-  	post demos_path, demos: { email: users(:one).email, password: users(:one).password }
+  	post demos_path, demos: { email: @user.email, password: @user.password }
   	assert_equal session[:user_id], users(:one).id 
   	assert_redirected_to users(:one)
   	follow_redirect!
@@ -30,5 +34,10 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   	assert_select "a[href=?]", logout_path, count: 0
   	assert_select "a[href=?]", user_path(users(:one)), count: 0
 
+  end
+
+  def initialize_user
+  	@user = users(:one)
+  	@user.password = @user.password_confirmation = "MyPassword"
   end
 end
